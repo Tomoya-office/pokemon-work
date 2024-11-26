@@ -21,7 +21,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
       $axios(response.data.results[i].url).then(response => {
         //↓ポケモンの画像URL  「mgPath」にレスポンスに含まれているポケモンの画像url
         const imgPath = response.data.sprites.other['official-artwork'].front_default;
-      //axiosでポケモンの日本語データを取得
+        //axiosでポケモンの日本語データを取得
         $axios(response.data.species.url).then(response => {
           // ↓ポケモン名の日本語訳を取得するためにAPIリクエスト
           //名前のデータを取得
@@ -31,12 +31,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
           // 取得したポケモンの情報をもとに表示するHTML要素を作成
           // ポケモンの写真の埋め込み
           //↓↓↓ listで囲い取得します。
-          const list_img = document.createElement(`li`);
+          const list_img = document.createElement('li');
+          console.log(list_img);
           //↓↓↓ list_imgに「list-item」というクラスを付与
           list_img.classList.add("list-item");
           const imgElement = `<div class="character"><img src="${imgPath}" width="475" height="475" alt="" class="character__img"></div>`;
           // ポケモンの名前を埋め込み
-          const nameElement = `<p class="character__name">${characterName}</p></li>`;
+          const nameElement = `<p class="character__name">${characterName}</p>`;
           list_img.innerHTML = imgElement + nameElement;
 
           // 作成したHTML要素をDOMに反映
@@ -45,17 +46,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
           characterElement.appendChild(list_img);
         });
       }).catch(() => {
-        API通信が失敗した時の処理
-        リクエストに失敗した場合はエラーメッセージを表示
+        //API通信が失敗した時の処理
+        //リクエストに失敗した場合はエラーメッセージを表示
         formElement.after(createErrorElement('エラーが発生しました。時間をおいて再度お試しください。'));
       });
     }
 
   }).catch(() => {
-
+    //API通信が失敗した時の処理
+    //リクエストに失敗した場合はエラーメッセージを表示
+    formElement.after(createErrorElement('エラーが発生しました。時間をおいて再度お試しください。'));
   });
-
-
 });
 
 // }).catch(() => {
